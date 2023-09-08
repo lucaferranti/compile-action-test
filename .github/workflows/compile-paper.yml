@@ -1,0 +1,26 @@
+name: Compile paper
+on:
+  pull_request:
+jobs:
+  compile-paper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Install latexmk
+        run: sudo apt-get install -y texlive-full
+      - name: generate pdf
+        run: |
+          cd paper
+          latexmk -c
+          latexmk -bibtex -pdf paper.tex
+          latexmk -c
+      - name: push pdf to gh-pages
+        with:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            BRANCH: gh-pages
+            FOLDER: paper
