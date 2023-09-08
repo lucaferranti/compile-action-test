@@ -11,14 +11,14 @@ jobs:
         with:
           ruby-version: 3.2.2
           bundler-cache: true
-      - name: Install latexmk
-        run: sudo apt-get install -y texlive-full
       - name: generate pdf
-        run: |
-          cd paper
-          latexmk -c
-          latexmk -bibtex -pdf paper.tex
-          latexmk -c
+        uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: |
+            cd paper
+            latexmk -c
+            latexmk -bibtex -pdf paper.tex
+            latexmk -c
       - name: push pdf to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
