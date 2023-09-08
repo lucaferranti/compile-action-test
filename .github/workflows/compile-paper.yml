@@ -16,6 +16,7 @@ jobs:
         with:
           run: |
             cd paper
+            ruby ./prep.rb
             latexmk -c
             latexmk -bibtex -pdf paper.tex
             latexmk -c
