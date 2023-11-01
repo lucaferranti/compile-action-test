@@ -5,12 +5,12 @@ keywords:
   - Game theory
   - Compiler
 authors:
-  - name: Erkki Esimerkki
+  - name: Luca Ferranti
     orcid: 0000-0003-1361-440X
     affiliation: 1
-  - name: John Doe
+  - name: Jane Doe
     affiliation: 1, 2
-  - name: 3rd author
+  - name: blah blah
     affiliation: 2
 affiliations:
   - name: University of something
