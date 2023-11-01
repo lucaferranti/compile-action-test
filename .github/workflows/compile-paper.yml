@@ -4,8 +4,6 @@ on:
 jobs:
   compile-paper:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/xu-cheng/texlive-full:latest
     steps:
       - uses: actions/checkout@v3
       - name: Install Ruby
@@ -13,12 +11,16 @@ jobs:
         with:
           ruby-version: 3.2.2
           bundler-cache: true
+          working-directory: ${{ github.action_path }}
       - name: generate pdf
-        run: |
-          cd paper
-          latexmk -c
-          latexmk -bibtex -pdf paper.tex
-          latexmk -c
+        uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: |
+            cd paper
+            latexmk -c
+            ruby --version
+            latexmk -bibtex -pdf paper.tex
+            latexmk -c
       - name: push pdf to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
