@@ -11,14 +11,13 @@ jobs:
         with:
           ruby-version: 3.2.2
           bundler-cache: true
-          working-directory: ${{ github.action_path }}
       - name: generate pdf
         uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
             cd paper
             latexmk -c
-            ruby --version
+            /opt/hostedtoolcache/Ruby/3.2.2/x64/bin/ruby --version
             latexmk -bibtex -pdf paper.tex
             latexmk -c
       - name: push pdf to gh-pages
